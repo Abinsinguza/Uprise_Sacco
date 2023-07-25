@@ -1,0 +1,14 @@
+org/uprise/systems/views/LoanView.class
+org/uprise/systems/constants/LoanStatus.class
+org/uprise/systems/constants/ContributionStatus.class
+org/uprise/systems/services/DepositService.class
+org/uprise/systems/models/User.class
+org/uprise/systems/views/StatementView.class
+org/uprise/systems/App.class
+org/uprise/systems/services/LoginService.class
+org/uprise/systems/services/LoanService.class
+org/uprise/systems/models/Loan.class
+org/uprise/systems/models/Deposit.class
+org/uprise/systems/views/DepositView.class
+org/uprise/systems/views/LoginView.class
+org/uprise/systems/services/StatementService.class
