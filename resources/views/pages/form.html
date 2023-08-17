@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grant or Deny Choice Form</title>
+</head>
+<body>
+
+<h1>Make a Choice</h1>
+
+<form id="choiceForm">
+    <p id="choiceText">Please make a choice:</p>
+    <button type="button" id="grantButton">Grant</button>
+    <button type="button" id="denyButton">Deny</button>
+    <input type="hidden" id="choiceInput" name="choice" value="">
+    <br><br>
+    <input type="submit" value="Submit">
+</form>
+
+<script>
+    const grantButton = document.getElementById("grantButton");
+    const denyButton = document.getElementById("denyButton");
+    const choiceInput = document.getElementById("choiceInput");
+    const choiceForm = document.getElementById("choiceForm");
+    const choiceText = document.getElementById("choiceText");
+
+    grantButton.addEventListener("click", function() {
+        choiceText.textContent = "You chose to Grant.";
+        choiceInput.value = "grant";
+    });
+
+    denyButton.addEventListener("click", function() {
+        choiceText.textContent = "You chose to Deny.";
+        choiceInput.value = "deny";
+    });
+
+    choiceForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        // Here you can perform additional actions with the submitted choice
+        // For example, you can use JavaScript to send the choice to the server using AJAX.
+    });
+</script>
+
+</body>
+</html>

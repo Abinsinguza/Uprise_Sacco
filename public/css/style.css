@@ -1,0 +1,409 @@
+ body {
+    
+        width:100%;
+        background:linear-gradient(to top, rgba(220, 202, 202, 0.5)50%, rgba(232, 214, 214, 0.5)50%), url(hero-bg.jpg);
+        background-position: center;
+        background-size: cover;
+        height: 109vh;
+       
+
+} 
+.linechart{
+  width: 600px;
+}
+
+
+
+
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 500px; /* Adjust the width as needed */
+    /* margin: 0 auto; Center the buttons horizontally */
+}
+
+/* .button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+} */
+/* .button-container .btn  {
+  color:rgb(38, 36, 34);
+  background-color:rgb(191, 169, 193);
+
+} */
+
+.button:hover {
+    background-color: #45a049;
+}
+
+.main-cards-wrapper {
+    display: flex; /* Use Flexbox */
+     /*justify-content: space-between; Distribute space between cards */
+    align-items: center; /* Center vertically */
+   
+    justify-content: center; /* Center horizontally */
+    gap: 20px; /* Add space between cards */
+    
+  
+  }
+  
+  .cardd {
+    width: 200px;
+    
+    /* Your existing card styling */
+    /* Optional: You might want to set a fixed width for each card */
+    flex: 1; /* Allow cards to take equal space within the wrapper */
+  }
+  .cardd > .material-icons-outlined {
+    font-size: 30px;
+  }
+
+  
+.main-cards-wrapper .card {
+    /* Styles specific to cards under .main-cards-wrapper */
+    width: 200px;
+    background-color: #f9f5f5;
+    /* Add more styles as needed */
+    border-radius: 10px; /* Add border radius */
+  }
+  .main-cards-wrapper .card .cardd {
+    /* Styles specific to .cardd elements under .main-cards-wrapper */
+    padding: 3px;
+    text-align: center;
+  }
+  .button-container .btn {
+    margin-right: 10px; /* Add right margin to create space between buttons */
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 5px;
+    color: rgb(241, 238, 238);
+    font-weight: bold;
+}
+
+/* Button colors based on loan types */
+.button-container .all-loans { background-color: #3498db; }
+.button-container .active-loans { background-color: #27ae60; }
+.button-container .delayed-loans { background-color: #e74c3c; }
+.button-container .undisbursed-loans { background-color: #f39c12; }
+.button-container .completed-loans { background-color: #9b59b6; }
+
+
+
+
+.pdf-button i.material-icons {
+  font-size: 18px;
+  margin-right: 5px; /* Space between icon and text */
+}
+.pdf-button.btn-primary {
+  background-color: #e74c3c;
+  border-color: #e74c3c;
+  color: white; 
+  width: 150px;
+
+  
+  
+ 
+}
+
+.loan {
+  font-size: 24px;
+  margin-bottom: 10px; /* Add some spacing between heading and table */
+}
+
+.tableloan {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.tableloan thead th {
+  background-color: #b0d4f1; /* Light blue background */
+  border-top: 1px solid #dee2e6;
+  text-align: left;
+  padding: 12px;
+  font-weight: bold;
+}
+
+.tableloan tbody td {
+  border-top: 1px solid #dee2e6;
+  padding: 12px;
+}
+
+.tableloan tbody tr:nth-of-type(odd) {
+  background-color: #f8f9fa;
+}
+
+.tableloan tbody tr:hover {
+  background-color: #f2f2f2;
+  transition: background-color 0.3s;
+}
+
+
+/* Styling for the modal backdrop */
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+}
+
+/* Styling for the modal content */
+.modal-content {
+  
+  
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Add a shadow */
+  /* width: 400px; */
+  border-radius: 8px;
+  padding: 30px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+}
+
+.modal-header {
+  background-color: #fff;; /* Semi-transparent blue background */
+  
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 10px 20px; /* Adjust padding as needed */
+  font-size: 2rem;
+  margin-bottom: 20px;
+ 
+  text-align: center;
+
+}
+
+.modal-title {
+  font-weight: bold;
+  margin: 0;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.modal-footer {
+  border-top: none;
+  padding: 10px 20px; /* Adjust padding as needed */
+}
+
+/* Styling for the close button */
+.close {
+  color: white;
+  font-size: 24px;
+}
+
+/* Customize as needed */
+
+.loanbtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; /* Add some spacing at the bottom */
+}
+
+.loanbtn a {
+  padding: 10px 20px;
+  border: 1px solid #3498db;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #3498db;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.loanbtn a:hover {
+  background-color: #3498db;
+  color: white;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* pie chart */
+/* #chartPreferences {
+  position: relative;
+  width: 700px;
+  height: 300px;
+} */
+
+#donut-chart {
+  position: absolute;
+  width: 100%;
+  height: 140%;
+
+    
+}
+
+
+div.customer table tbody tr td button {
+  border-radius: 2rem;
+}
+
+div.customer table tbody tr td .approve:hover {
+  background-color: #86e49d;
+  color: white;
+}
+
+div.customer table tbody tr td .retrieve:hover {
+  background-color: #d893a3;
+  color: white;
+}
+
+div.customer main .table_header p {
+  margin-bottom: 20px;
+}
+
+div.customer div.table {
+  width: 82vw;
+  height: 90vh;
+  background-color: #fff5;
+  backdrop-filter: blur(7px);
+  box-shadow: 0 .4rem .8rem #0005;
+  border-radius: .8rem;
+  overflow: hidden;
+}
+
+div.customer .table_header {
+  width: 100%;
+  height: 10%;
+  background-color: #fff4;
+  padding: .8rem 1rem;
+}
+
+div.customer .table_body {
+  width: 95%;
+  max-height: calc(89% - 1.6rem);
+  background-color: #fffb;
+  margin: .8rem auto;
+  border-radius: .6rem;
+  overflow: auto;
+}
+
+div.customer .table_body::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+div.customer .table_body::-webkit-scrollbar-thumb {
+  border-radius: .5rem;
+  background-color: #0004;
+  visibility: hidden;
+}
+
+div.customer .table_body:hover::-webkit-scrollbar-thumb {
+  visibility: visible;
+}
+
+div.customer table {
+  width: 100%;
+}
+
+div.customer table, div.customer th, div.customer td {
+  border-collapse: collapse;
+  padding: 1rem;
+  text-align: left;
+}
+
+div.customer thead th {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: #d5d1defe;
+}
+
+div.customer tbody tr:nth-child(even) {
+  background-color: #0000000b;
+}
+
+div.customer tbody tr:hover {
+  background-color: #fff6;
+}
+
+div.customer .status {
+  padding: .4rem 0;
+  border-radius: 2rem;
+  text-align: center;
+}
+
+div.customer .status.delivered {
+  background-color: #86e49d;
+  color: #006b21;
+}
+
+div.customer .status.denied {
+  background-color: #d893a3;
+  color: #b30021;
+}
+
+div.customer .status.pending {
+  background-color: #6fcaea;
+}
+
+.customer .modal-content-large {
+  width: 100%; /* You can adjust this value as needed */
+  margin: auto; /* Center the modal content horizontally */
+}
+
+@media (max-width: 1000px) {
+  div.customer td:not(:first-of-type) {
+    min-width: 12.1rem;
+  }
+}
+
+/*Attendance List serction  */
+.attendance{
+  margin-top: 20px;
+  text-transform: capitalize;
+}
+.attendance-list{
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.tablek{
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 15px;
+  min-width: 100%;
+  overflow: hidden;
+  border-radius: 5px 5px 0 0;
+}
+.tablek thead tr{
+  color: #fff;
+  background: #34AF6D;
+  text-align: left;
+  font-weight: bold;
+}
+.tablek th,
+.tablek td{
+  padding: 12px 15px;
+}
+.tablek tbody tr{
+  border-bottom: 1px solid #ddd;
+}
+.tablek tbody tr:nth-of-type(odd){
+  background: #f3f3f3;
+}
+.tablek tbody tr.active{
+  font-weight: bold;
+  color: #4AD489;
+}
+.tablek tbody tr:last-of-type{
+  border-bottom: 2px solid #4AD489;
+}
+.tablek button{
+  padding: 6px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #4AD489;
+}
