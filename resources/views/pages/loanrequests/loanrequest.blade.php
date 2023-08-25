@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'table', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION', 'navName' => 'Table List', 'activeButton' => 'laravel'])
+@extends('layouts.app', ['activePage' => 'table', 'title' => 'UPRISE SACCO Loan Requests', 'navName' => 'Loan Requests', 'activeButton' => 'laravel'])
 
 @section('content')
     <div class="content">
@@ -19,8 +19,11 @@
                               Rate: {{$rate->value}}
                           </p>
                             <div>
-                                <a href="{{url('rate',$rate->id)}}" class="btn btn-success" data-toggle="modal" data-target="#editModal{{ $rate->id }}">Edit</a>
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#requestModal">Approve Loans</button>
+                              
+                              <a href="{{url('rate',$rate->id)}}" class="btn btn-success" data-toggle="modal" data-target="#editModal{{ $rate->id }}">Edit</a>
+                              <button class="btn btn-primary" data-toggle="modal" data-target="#requestModal">Approve Loans</button>
+                            
+                                
                                 <!-- edit modal -->
                 
                                 <div class="modal fade" id="editModal{{ $rate->id }}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -46,14 +49,25 @@
                                 </div> 
                                 @endforeach
                 
-
+                                   
                             </div>
                             <div class="container mt-5">
                                 
                                <div class="loanbtn">
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#requestModal">pending</button>
-                                <a href="{{ route('pendingloans') }}">Pending Requests</a>
-                                <a href="{{ route('rankloanrequests') }}">Ranked Requests</a>
+                                <a href="{{ route('loanreqdashboard') }}">All Requests</a>
+                                <a href="{{ route('denyrequests') }}">Denied</a>
+                                <a href="{{ route('pendingloans') }}">Granted</a>
+                                <a href="{{ route('rejrequests') }}">Rejected</a>
+                                
+                                <div class= "searchloanreq">
+                                  <form action="{{ route('search.loans') }}" method="GET">
+                                    @csrf
+
+                                    <label for="search"></label>
+                                    <input type="text" id="query" name="query" name="search" placeholder="search for loan...">
+                                    <button type="submit" style="background-color: #e6e5e4; color: rgb(22, 3, 3); border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px;"> <i class="fas fa-search"></i>Search</button>
+                                </form>
+                                </div>
                                </div>
                             
                         </div>
@@ -93,7 +107,7 @@
                     <div class="tablep">
                         <section class="table_header">
                           {{-- <h1>Customer's orders</h1> --}}
-                          <p>here a historic of the past transaction in your account</p>
+                          <p>Approve pending loan requests</p>
                         </section>
                         
                               <form method="post" action="/updateApprovals">
@@ -132,13 +146,16 @@
                               </strong>
                                 </strong></td>
                                 
-                                <td>
+                               <td>
                                  
                                   {{ $req->clientChoice }}
                                 </td>
                                 <td>
-                                  <button type="button" class="grantButton">Grant</button>
-                                  <button type="button" class="denyButton">Deny</button>
+                                  <button type="button" class="grantButton" style="background-color: green; color: white;">Grant</button>
+                                  <button type="button" class="denyButton" style="background-color: red; color: white;">Deny</button>
+
+                                  {{-- <button type="button" class="grantButton">Grant</button>
+                                  <button type="button" class="denyButton">Deny</button> --}}
                                 </td>
                             
                               </tr>

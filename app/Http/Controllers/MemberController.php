@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function registerMember (Request $request){
         $memberInf=$request->validate([
             'email'=> 'required',
@@ -140,7 +145,9 @@ public function getActiveMembers()
         ->where('performance', '>', 100)
         ->get();
 
-    return view('admin.member.activemember', ['activeMembers' => $activeMembers]);
+        $totalAmount = $activeMembers->sum('balance');
+
+    return view('admin.member.activemember', ['activeMembers' => $activeMembers,'totalAmount' => $totalAmount]);
 }
 
 public function getNewMembers()
@@ -148,8 +155,21 @@ public function getNewMembers()
     $sixMonthsAgo = now()->subMonths(6);
 
     $newMembers = Member::where('contributionStart', '>', $sixMonthsAgo)->get();
+
+    $totalAmount = $newMembers->sum('balance');
     
-    return view('admin.member.newmember', ['newMembers' => $newMembers]);
+    return view('admin.member.newmember', ['newMembers' => $newMembers,'totalAmount' => $totalAmount ]);
+}
+
+public function largeContribution()
+{
+    $largeLoanPaymentsAndDepositedDeposits = Deposit::whereIn('status', ['loan payment', 'deposited'])
+                                                      ->where('amount', '>', 450000)
+                                                      ->get();
+
+    $totalAmount = $largeLoanPaymentsAndDepositedDeposits->sum('amount');
+
+    return view('pages.deposits.large', ['largeLoanPaymentsAndDepositedDeposits' => $largeLoanPaymentsAndDepositedDeposits, 'totalAmount' => $totalAmount]);
 }
 
 

@@ -3,16 +3,16 @@
         <nav>
             <ul class="footer-menu">
                 <li>
-                    <a href="https://www.creative-tim.com" class="nav-link" target="_blank">{{ __('Creative Tim') }}</a>
+                    <a href="{{route('depositdashboard')}}" class="nav-link" target="_blank">{{ __('Deposit') }}</a>
                 </li>
                 <li>
-                    <a href="https://www.updivision.com" class="nav-link" target="_blank">{{ __('Updivision') }}</a>
+                    <a href="{{route('loandashboard')}}" class="nav-link" target="_blank">{{ __('Accepted loans') }}</a>
                 </li>
                 <li>
-                    <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">{{ __('About Us') }}</a>
+                    <a href="{{route('page.index', 'notifications')}}" class="nav-link" target="_blank">{{ __('Notifications') }}</a>
                 </li>
                 <li>
-                    <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">{{ __('Blog') }}</a>
+                    <a href="{{route('profile.edit') }}" class="nav-link" target="_blank">{{ __('Settings') }}</a>
                 </li>
             </ul>
             <p class="copyright text-center">

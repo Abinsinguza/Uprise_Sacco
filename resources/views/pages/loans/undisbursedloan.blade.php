@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'table', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION', 'navName' => 'Table List', 'activeButton' => 'laravel'])
+@extends('layouts.app', ['activePage' => 'table', 'title' => 'UPRISE SACCO Undisbured Loans', 'navName' => 'Undisbursed Loans', 'activeButton' => 'laravel'])
 
 @section('content')
     <div class="content">
@@ -6,9 +6,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card strpied-tabled-with-hover">
-                        <h3 class="loan">Undisbursed Loans</h3>
+                        <h3 class="loan"></h3>
 
-                        <br> 
+                        
 
                         <div class="button-container">
                             <a class="btn btn-primary all-loans" href="{{ route('loandashboard') }}">All loans</a>
@@ -44,13 +44,13 @@
                     <tr>
                         <td>{{ $data->loanId }}</td>
                         <td>{{ $data->memberId }}</td>
-                        <td> {{ $data->amountToPay }}</td>
-                        <td> {{ $data->amountPerInstallment }}</td>
+                        <td> {{ number_format($data->amountToPay, 2 )}}</td>
+                        <td> {{ number_format($data->amountPerInstallment, 2 )}}</td>
                         <td>{{ $data->installments }}</td>
                         <td>{{ $data->paymentStart }}</td>
                         <td>{{ $data->loanProgress }}</td>
-                        <td>{{ $data->amountCleared }}</td>
-                        <td>{{ $data->loanBalance }}</td>
+                        <td>{{ number_format($data->amountCleared, 2 )}}</td>
+                        <td>{{ number_format($data->loanBalance, 2) }}</td>
                               
                     </tr>
                     @endforeach
@@ -61,10 +61,10 @@
                 </div>
                 <div class="col-md-12">
                     <div class="card card-plain table-plain-bg">
-                        <div class="card-header ">
+                        {{-- <div class="card-header ">
                             <h4 class="card-title">Table on Plain Background</h4>
                             <p class="card-category">Here is a subtitle for this table</p>
-                        </div>
+                        </div> --}}
                         <div class="card-body table-full-width table-responsive">
 
                         </div>

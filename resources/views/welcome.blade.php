@@ -1,28 +1,36 @@
-@extends('layouts/app', ['activePage' => 'welcome', 'title' => 'UPRISE SACCO'])
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sacco Home Page</title>
+  <link rel="stylesheet" href="{{ asset('style.css')}}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Handjet&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="logo">
+    <p><strong>UPRISE SACCO</strong></p>
+  </div>
 
-@section('content')
-    <div class="full-page section-image" data-color="orange" data-image="{{asset('light-bootstrap/img/full-screen-image-2.jpg')}}">
-        <div class="content">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-7 col-md-8">
-                        <h1 class="text-white text-center">{{ __('Welcome to UPRISE SACCO Management System.') }}</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-@endsection
-
-@push('js')
-    <script>
-        $(document).ready(function() {
-            demo.checkFullPageBackgroundImage();
-
-            setTimeout(function() {
-                // after 1000 ms we add the class animated to the login/register card
-                $('.card').removeClass('card-hidden');
-            }, 700)
-        });
-    </script>
-@endpush
+  <div class="navigation">
+    <a href="#" class="nav-link"><i class="fas fa-home"></i> Home</a>
+    <a href="{{ route('login') }}" class="nav-link"><i class="fas fa-sign-in-alt"></i> Login</a>
+    <a href="{{ route('register') }}" class="nav-link"><i class="fas fa-user-plus"></i> Register</a>
+  </div>
+  <div class="content">
+      <img src="{{ asset('img/logo.png')}}">
+  </div>
+  <div class="welcome-message">
+    <h1>Welcome to Uprise Sacco...</h1>
+    <p>Digital gateway to financial empowerment!...<br><br>
+    Our goal is to provide you with a range of financial solutions 
+    and <br>services tailored to meet your unique needs. Whether you're 
+    looking <br>to save for the future, secure a loan, or invest wisely, 
+    we are here to <br>support you every step of the way.
+    </p>
+  </div>
+</body>
+</html>

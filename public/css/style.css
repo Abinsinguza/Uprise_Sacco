@@ -407,3 +407,11 @@ div.customer .status.pending {
   background: transparent;
   border: 1px solid #4AD489;
 }
+
+.notification {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}

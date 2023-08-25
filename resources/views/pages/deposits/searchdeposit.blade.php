@@ -1,18 +1,16 @@
-@extends('layouts.app', ['activePage' => 'table', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION', 'navName' => 'Table List', 'activeButton' => 'laravel'])
+@extends('layouts.app', ['activePage' => 'table', 'title' => 'UPRISE SACCO Deposit', 'navName' => 'Searched Deposits', 'activeButton' => 'laravel'])
 
 @section('content')
-    <div class="content">
+    <div class="content" style="font-family: Arial, sans-serif;">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card strpied-tabled-with-hover">
-                        <div class="card-header ">
+                    <div class="card strpied-tabled-with-hover" style="border: 1px solid #e0e0e0; box-shadow: 0px 0px 10px rgba(0,0,0,0.1);">
+                        <div class="card-header" style="background-color: #f5f5f5;">
                             <div class="container mt-5">
                                 <button class="btn btn-primary" data-toggle="modal" data-target="#uploadModal">Add CSV File</button>
-                                <!-- Button to trigger the modal -->
                                 <button class="btn btn-primary" data-toggle="modal" data-target="#searchModal">Search</button>
-                                
-                                <!-- Upload Modal -->
+                                <!-- Upload Modal -->                             <!-- Upload Modal -->
                                 <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -62,17 +60,26 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-                                
+                                <!-- ... rest of the code ... -->
+                                <p style="font-weight: bold; color:rgb(143, 49, 49); text-align: right;"> Total:UGX,{{number_format($totalAmount)}}</p>
+                                <div style="margin-bottom: 20px; text-align: left;">
+                                    <a href="{{ route('current-month-deposits') }}" style="margin-right: 15px; color: #007bff; text-decoration: none; font-weight: bold;">Current Month Deposits</a>
+                                    <a href="{{ route('loan-payments') }}" style="margin-right: 15px; color: #007bff; text-decoration: none; font-weight: bold;">Loan Payments</a>
+                                    <a href="{{ route('deposited-deposits') }}" style="margin-right: 15px; color: #007bff; text-decoration: none; font-weight: bold;">Contribution Deposits</a>
+                                    <a href="{{ route('pending-deposits') }}" style="margin-right: 15px; color: #007bff; text-decoration: none; font-weight: bold;">Pending Deposits</a>
+                                    <a href="{{ route('all-deposits') }}" style="color: #007bff; text-decoration: none; font-weight: bold;">All Deposits</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body table-full-width table-responsive">
-                            <table class="table table-hover table-striped">
-                                <thead>
-                                    <th>Receipt No</th>
-                                    <th>Amount(UGX)</th>
-                                    <th>Date</th>
-                                    <th>Member ID</th>
-                                    <th>Status</th>
+                        <div class="card-body table-full-width table-responsive" style="padding: 20px;">
+                            
+                            <table class="table table-hover table-striped" style="border-collapse: collapse; width: 100%;">
+                                <thead style="background-color: #c9c1c1;">
+                                    <th style="color: black; font-weight: bold; ">Receipt No</th>
+                                    <th style="color: black; font-weight: bold;">Amount(UGX)</th>
+                                    <th style="color: black; font-weight: bold;">Date</th>
+                                    <th style="color: black; font-weight: bold;">Member ID</th>
+                                    <th style="color: black; font-weight: bold;">Status</th>
                                 </thead>
                                 <tbody>
                                     @foreach($searchdeposits as $deposit)
@@ -84,36 +91,6 @@
                         <td>{{ $deposit->status }}</td>
                     </tr>
                     @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="card card-plain table-plain-bg">
-                        <div class="card-header ">
-                            <h4 class="card-title">Table on Plain Background</h4>
-                            <p class="card-category">Here is a subtitle for this table</p>
-                        </div>
-                        <div class="card-body table-full-width table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <th>Receipt No</th>
-                                    <th>Amount(UGX)</th>
-                                    <th>Date</th>
-                                    <th>Member ID</th>
-                                    <th>Status</th>
-                                </thead>
-                                <tbody>
-                                    @foreach($deposits as $deposit)
-                                    <tr>
-                                        <td>{{ $deposit->receiptNo }}</td>
-                                        <td> {{ number_format($deposit->amount, 2) }}</td>
-                                        <td>{{ $deposit->date }}</td>
-                                        <td>{{ $deposit->memberId }}</td>
-                                        <td>{{ $deposit->status }}</td>
-                                    </tr>
-                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

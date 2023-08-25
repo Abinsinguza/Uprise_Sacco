@@ -8,6 +8,11 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class LoanController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //
     public function getCompletedLoans()
     {

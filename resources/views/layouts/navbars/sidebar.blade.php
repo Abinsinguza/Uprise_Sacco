@@ -7,7 +7,7 @@ Tip 2: you can also add an image using data-image tag
 
     <div class="sidebar-wrapper">
         <div class="logo">
-            <a href="http://www.creative-tim.com" class="simple-text">
+            <a href="{{route('dashboard')}}" class="simple-text">
                 <img src="{{ asset ('img/log.png') }}" alt="UPRISE SACCO Logo"  style="height: 40px;  margin-right: 2px; border-radius: 10px; ">
                 {{ __("UPRISE SACCO") }}
             </a>
@@ -34,7 +34,7 @@ Tip 2: you can also add an image using data-image tag
                     <ul class="nav">
                         <li class="nav-item @if($activePage == 'loanrequest') active @endif">
                             <a class="nav-link" href="{{route('loanreqdashboard')}}">
-                                <i class="nc-icon nc-single-02"></i>
+                                <i class="bi bi-envelope-plus position-relative"></i>
                                 <p>{{ __("LOAN REQUESTS") }}</p>
                             </a>
                         </li>
@@ -48,18 +48,38 @@ Tip 2: you can also add an image using data-image tag
                 </div>
             </li>
 
-            <li class="nav-item @if($activePage == 'deposit') active @endif">
-                <a class="nav-link" href="{{route('depositdashboard')}}">
+            <li class="nav-item @if($activePage == 'alldeposit') active @endif">
+                <a class="nav-link" href="{{route('all-deposits')}}">
                     <i class="nc-icon nc-money-coins"></i>
                     <p>{{ __("DEPOSITS") }}</p>
                 </a>
             </li>
-            <li class="nav-item @if($activePage == 'member') active @endif">
-                <a class="nav-link" href="{{route('admindashboard')}}">
-                    <i class="nc-icon nc-paper-2"></i>
-                    <p>{{ __("Member") }}</p>
+            <li class="nav-item @if($activePage == 'trans') active @endif">
+                <a class="nav-link" href="{{route('loan-payments-deposited')}}">
+                    <i class="nc-icon nc-pin-3"></i>
+                    <p>{{ __("Transactions") }}</p>
                 </a>
             </li>
+            <li class="nav-item @if($activePage == 'member') active @endif">
+                <a class="nav-link" href="{{route('admindashboard')}}">
+                    <i class="bi bi-people-fill"></i>
+                    <p>{{ __("Members") }}</p>
+                </a>
+            </li> 
+            <li class="nav-item @if($activePage == 'notifications') active @endif">
+                <a class="nav-link" href="{{route('page.index', 'notifications')}}">
+                    <i class="nc-icon nc-bell-55"></i>
+                    <p>{{ __("Notifications") }}</p>
+                </a>
+            </li> 
+              <li class="nav-item @if($activePage == 'maps') active @endif">
+                <a class="nav-link" href="{{route('profile.edit') }}">
+                    <i class="bi bi-gear"></i></i>
+                    <p>{{ __("Settings") }}</p>
+                </a>
+            </li>
+           
+
             <li class="nav-item @if($activePage == 'icons') active @endif">
                 <a class="nav-link" href="{{route('page.index', 'icons')}}">
                     <i class="nc-icon nc-atom"></i>
@@ -72,12 +92,7 @@ Tip 2: you can also add an image using data-image tag
                     <p>{{ __("Maps") }}</p>
                 </a>
             </li>
-            <li class="nav-item @if($activePage == 'notifications') active @endif">
-                <a class="nav-link" href="{{route('page.index', 'notifications')}}">
-                    <i class="nc-icon nc-bell-55"></i>
-                    <p>{{ __("Notifications") }}</p>
-                </a>
-            </li>
+           
             <li class="nav-item">
                 <a class="nav-link active bg-danger" href="{{route('page.index', 'upgrade')}}">
                     <i class="nc-icon nc-alien-33"></i>

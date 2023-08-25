@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'table', 'title' => 'UPRISE SACCO', 'navName' => 'Table List', 'activeButton' => 'laravel'])
+@extends('layouts.app', ['activePage' => 'table', 'title' => 'UPRISE SACCO', 'navName' => 'UPRISE SACCO members', 'activeButton' => 'laravel'])
 
 @section('content')
     <div class="content">
@@ -16,17 +16,22 @@
                             </div>
                             @endif
                           
-                                       <!-- Register Member Button -->
-                                       <button class="btn btn-primary" data-toggle="modal" data-target="#registerModal">Register a Member</button>
-                                       <button class="btn btn-primary" data-toggle="modal" data-target="#uploadModal">Add CSV File</button>
-                                        <!-- Button to trigger the modal -->
-                                        <button class="btn btn-primary" data-toggle="modal" data-target="#searchMemberModal">Search</button>
-                                        <a href="{{ route('active.members') }}">View Active Members</a>
-                                        <a href="{{ route('new.members') }}">View New Members</a>
+                        
                         </div>      
                         <section class="attendance">
+                             <!-- Register Member Button -->
+                             <button class="btn btn-primary" data-toggle="modal" data-target="#registerModal">Register a Member</button>
+                             <button class="btn btn-primary" data-toggle="modal" data-target="#uploadModal">Add CSV File</button>
+                              <!-- Button to trigger the modal -->
+                              <button class="btn btn-primary" data-toggle="modal" data-target="#searchMemberModal">Search</button>
                             <div class="attendance-list">
-                              <h3>Members List</h1>
+                                <p style="font-weight: bold; color:rgb(143, 49, 49); text-align: right;"> Total Contributions:UGX,{{number_format($totalAmount)}}</p>
+                                <div style="margin-bottom: 20px; text-align: left;"> 
+                                    <a href="{{ route('active.members') }}" style="margin-right: 15px; color: #007bff; text-decoration: none; font-weight: bold;">Active Members</a>
+                                    <a href="{{ route('new.members') }}" style="margin-right: 15px; color: #007bff; text-decoration: none; font-weight: bold;">New Members</a>
+                                    <a href="{{ route('large-loan-payments-deposited') }}" style="margin-right: 15px; color: #007bff; text-decoration: none; font-weight: bold;">Large Transactions</a>
+                                    <a href="{{ route('loan-payments-deposited') }}" style="color: #007bff; text-decoration: none; font-weight: bold;">All Transactions</a>
+                                </div>
 
                               <table class="tablek">
                                 <thead>

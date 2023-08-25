@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Deposit;
 use Illuminate\Http\Request;
 
 
 class DepositController extends Controller
+
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function showForm()
     {
         return view('deposit');
@@ -83,12 +90,134 @@ class DepositController extends Controller
             })->get();
 
         }
+        $totalAmount = $searchdeposits->sum('amount');
+
         $deposits = Deposit::all();
 
-        return view('pages.deposits.searchdeposit', ['deposits' => $deposits, 'searchdeposits' => $searchdeposits]);
+        return view('pages.deposits.searchdeposit', ['deposits' => $deposits, 'searchdeposits' => $searchdeposits, 'totalAmount' => $totalAmount,]);
 
        // return view('pages/searchdeposit', compact('searchdeposits'));
     
         // Now you can use $deposits to access the search results
     }
+
+ 
+
+public function totalAmountByMonth()
+{
+    $currentMonth = Carbon::now()->month;
+
+    $totalAmountByMonth = Deposit::selectRaw('YEAR(date) as year, MONTH(date) as month, SUM(amount) as total_amount')
+        ->whereMonth('date', $currentMonth) // Filter for the current month
+        ->groupBy(DB::raw('YEAR(date), MONTH(date)'))
+        ->orderBy('year', 'desc')
+        ->orderBy('month', 'desc')
+        ->get();
+
+    $formattedAmounts = [];
+
+    foreach ($totalAmountByMonth as $amount) {
+        $monthName = Carbon::createFromDate($amount->year, $amount->month)->format('F');
+        $formattedAmounts[] = [
+            'month' => $monthName,
+            'year' => $amount->year,
+            'total_amount' => $amount->total_amount,
+        ];
+    }
+
+    return view('pages.total', ['amountsByMonth' => $formattedAmounts]);
+}
+
+public function depositsInCurrentMonth()
+{
+    $currentMonth = Carbon::now()->month;
+    $currentYear = Carbon::now()->year;
+
+    $thisdeposits = Deposit::whereYear('date', $currentYear)
+                        ->whereMonth('date', $currentMonth)
+                        ->get();
+         $totalAmount = $thisdeposits->sum('amount');
+
+    return view('pages.deposits.thismonth', ['thisdeposits' => $thisdeposits,'totalAmount' => $totalAmount]);
+}
+
+public function loanPayments()
+{
+    $loanPayments = Deposit::where('status', 'loan payment')->get();
+
+    $totalLoanPayments = $loanPayments->sum('amount');
+
+    return view('pages.deposits.loan_payments', ['loanPayments' => $loanPayments, 'totalLoanPayments' => $totalLoanPayments]);
+}
+public function depositedDeposits()
+{
+    $depositedDeposits = Deposit::where('status', 'deposited')->get();
+
+    $totalDepositedAmount = $depositedDeposits->sum('amount');
+
+    return view('pages.deposits.deposited', ['depositedDeposits' => $depositedDeposits, 'totalDepositedAmount' => $totalDepositedAmount]);
+}
+
+public function pendingDeposits()
+{
+    $pendingDeposits = Deposit::where('status', 'pending')->get();
+
+    $totalPendingAmount = $pendingDeposits->sum('amount');
+
+    return view('pages.deposits.pending', ['pendingDeposits' => $pendingDeposits, 'totalPendingAmount' => $totalPendingAmount]);
+}
+public function allDeposits()
+{
+    $allDeposits = Deposit::all();
+
+    $totalAllAmount = $allDeposits->sum('amount');
+
+    return view('pages.deposits.alldeposits', ['allDeposits' => $allDeposits, 'totalAllAmount' => $totalAllAmount]);
+}
+
+public function loanPaymentsAndDepositedDeposits()
+{
+    $loanPaymentsAndDepositedDeposits = Deposit::whereIn('status', ['loan payment', 'deposited'])->get();
+
+    $totalAmount = $loanPaymentsAndDepositedDeposits->sum('amount');
+
+    return view('pages.deposits.trans', ['loanPaymentsAndDepositedDeposits' => $loanPaymentsAndDepositedDeposits, 'totalAmount' => $totalAmount]);
+}
+
+
+public function loanPaymentsAndDepositedDepositsOnCurrentDate()
+{
+    $currentDate = Carbon::now()->toDateString();
+
+    $loanPaymentsAndDepositedDeposits = Deposit::whereDate('updated_at', $currentDate)
+                                                ->whereIn('status', ['loan payment', 'deposited'])
+                                                ->get();
+
+    $totalAmount = $loanPaymentsAndDepositedDeposits->sum('amount');
+
+    return view('pages.deposits.current_date', ['loanPaymentsAndDepositedDeposits' => $loanPaymentsAndDepositedDeposits, 'totalAmount' => $totalAmount]);
+}
+public function depositsInCurrentWeek()
+{
+    $currentWeekStart = Carbon::now()->startOfWeek();
+    $currentWeekEnd = Carbon::now()->endOfWeek();
+
+    $deposits = Deposit::whereBetween('updated_at', [$currentWeekStart, $currentWeekEnd])->get();
+
+    $totalAmount = $deposits->sum('amount');
+
+    return view('pages.deposits.current_week', ['deposits' => $deposits, 'totalAmount' => $totalAmount]);
+}
+public function largeLoanPaymentsAndDepositedDeposits()
+{
+    $largeLoanPaymentsAndDepositedDeposits = Deposit::whereIn('status', ['loan payment', 'deposited'])
+                                                      ->where('amount', '>', 450000)
+                                                      ->get();
+
+    $totalAmount = $largeLoanPaymentsAndDepositedDeposits->sum('amount');
+
+    return view('pages.deposits.large', ['largeLoanPaymentsAndDepositedDeposits' => $largeLoanPaymentsAndDepositedDeposits, 'totalAmount' => $totalAmount]);
+}
+
+
 }

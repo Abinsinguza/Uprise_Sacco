@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'table', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION', 'navName' => 'Table List', 'activeButton' => 'laravel'])
+@extends('layouts.app', ['activePage' => 'table', 'title' => 'UPRISE SACCO Loan Managment', 'navName' => 'Active Loans', 'activeButton' => 'laravel'])
 
 @section('content')
     <div class="content">
@@ -6,10 +6,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card strpied-tabled-with-hover">
-                        <h3 class="loan">Active Loans</h3>
-
-                        <br> 
-
+                        <h3 class="loan"></h3>
                         <div class="button-container">
                             <a class="btn btn-primary all-loans" href="{{ route('loandashboard') }}">All loans</a>
                             <a class="btn btn-primary active-loans" href="{{ route('activeLoans') }}">Active</a>

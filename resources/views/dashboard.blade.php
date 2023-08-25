@@ -2,17 +2,64 @@
 
 @section('content')
     <div class="content">
+        <div style="position: fixed; top: 55px; right: 20px;">
+            <form action="{{ route('email') }}" method="POST">
+                @csrf
+                <button type="submit" style="background-color: #ec4141; border-radius: 8px; padding: 3px; box-shadow: 0 2px 4px rgba(220, 216, 216, 0.1);cursor: pointer;">Send Email</button>
+            </form>
+        </div>
+        
+        <!-- notification -->
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            {{-- Dashboard {{ $notifications}} --}}
+                        </div>
+        
+                        <div class="card-body">
+                            @if(session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+                            @forelse($notifications as $notification)
+                            <div style="background-color:#e0fded; color:#3a4f4c;" class="alert alert-success" role="alert">
+                                {{ $notification->created_at }} {{ $notification->name }} {{ $notification->data }}.
+                                <a href="{{ route('notifications.mark-as-read', ['notificationId' => $notification->id]) }}" class="float-right mark-as-read" data-id="{{ $notification->id }}">
+                                    Mark as read
+                                </a>
+                            </div>
+                        
+                            @if($loop->last)
+                                <a href="{{ route('notifications.mark-all-as-read') }}" id="mark-all">
+                                    Mark all as read
+                                </a>
+                            @endif
+                        @empty
+                            {{-- <p>No notifications to display.</p> --}}
+                        @endforelse
+                        
+        
+                              
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="dash">
         <div class="c ">
             <!-- notification -->
-            <div class="card">
+            {{-- <div class="card">
              @if (session('status'))
                 <div style="background-color: #c3f1c5; color: #272424; padding: 5px; border-radius: 4px; font-size: 10px;  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
                  {{ session('status') }}
                 </div>
-             @endif
-                
-            </div>
+             @endif     
+            </div> --}}
+
+
       <!-- Main -->
       <div class="main-cards-wrapper">
         <div class="card">
@@ -65,8 +112,9 @@
                     <div class="card ">
                         
                         <div class="card-header ">
+                            
                             <h4 class="card-title">{{ __('Members Statistics') }}</h4>
-                            <p class="card-category">{{ __('Last Campaign Performance') }}</p>
+                            <p class="card-category">{{ __('') }}</p>
                         </div>
 
                         <div class="piechart">
@@ -124,7 +172,7 @@
                             </div>
                             <hr>
                             <div class="stats">
-                                <i class="fa fa-clock-o"></i> {{ __('Campaign sent 2 days ago') }}
+                                <i class="fa fa-clock-o"></i> {{ __('UPRISE SACCO members') }}
                             </div>
                         </div>
                     </div>
@@ -186,7 +234,7 @@
                             </div>
                             <hr>
                             <div class="stats">
-                                <i class="fa fa-history"></i> {{ __('Updated 3 minutes ago') }}
+                                <i class="fa fa-history"></i> {{ __('UPRISE SACCO performance') }}
                             </div>
                         </div>
                     </div>
@@ -196,72 +244,69 @@
                 <div class="col-md-6">
                     <div class="card ">
                         <div class="card-header ">
-                            <h4 class="card-title">{{ __('2017 Sales') }}</h4>
-                            <p class="card-category">{{ __('All products including Taxes') }}</p>
+                            <h4 class="card-title">{{ __('2023 Deposits') }}</h4>
+                            <p class="card-category">{{ __('Total amount deposited') }}</p>
                         </div>
-                        <div class="card-body ">
+                        <div class="card-body">
                             <div id="area-chart" class="ct-chart"></div>
                         </div>
-                         <div>
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
-                            <script>
-                                var areaChartOptions = {
-                              series: [{
-                                name: 'Purchase Orders',
-                                data: [31, 40, 28, 51, 42, 109, 100]
-                              }, {
-                                name: 'Sales Orders',
-                                data: [11, 32, 45, 32, 34, 52, 41]
-                              }],
-                              chart: {
-                                height: 350,
-                                type: 'area',
-                                toolbar: {
-                                  show: false,
+                        
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
+                        <script>
+                            var areaChartOptions = {
+                                series: [{
+                                    name: 'Total Amount',
+                                    data: [
+                                        @foreach ($amountsByMonth as $amount)
+                                            {{ $amount['total_amount'] }}/1000000,
+                                        @endforeach 
+                                    ]
+                                }],
+                                chart: {
+                                    height: 350,
+                                    type: 'area',
+                                    toolbar: {
+                                        show: false,
+                                    },
                                 },
-                              },
-                              colors: ["#4f35a1", "#246dec"],
-                              dataLabels: {
-                                enabled: false,
-                              },
-                              stroke: {
-                                curve: 'smooth'
-                              },
-                              labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-                              markers: {
-                                size: 0
-                              },
-                              yaxis: [
-                                {
-                                  title: {
-                                    text: 'Purchase Orders',
-                                  },
+                                colors: ["#4f35a1"],
+                                dataLabels: {
+                                    enabled: false,
                                 },
-                                {
-                                  opposite: true,
-                                  title: {
-                                    text: 'Sales Orders',
-                                  },
+                                stroke: {
+                                    curve: 'smooth'
                                 },
-                              ],
-                              tooltip: {
-                                shared: true,
-                                intersect: false,
-                              }
+                                xaxis: {
+                                    categories: [
+                                        @foreach ($amountsByMonth as $amount)
+                                            '{{ $amount['month'] }}',
+                                        @endforeach
+                                    ],
+                                },
+                                yaxis: {
+                                    title: {
+                                        text: 'Total Amount(UGX) in Million',
+                                    },
+                                },
+                                markers: {
+                                    size: 0
+                                },
+                                tooltip: {
+                                    shared: true,
+                                    intersect: false,
+                                }
                             };
-                            
+                        
                             var areaChart = new ApexCharts(document.querySelector("#area-chart"), areaChartOptions);
                             areaChart.render();
-                            </script>
-                            
-                            
-                        </div>
+                        </script>
+              
                         
                         <div class="card-footer ">
-                            <div class="legend">
+                            {{-- <div class="legend">
                                 <i class="fa fa-circle text-info"></i> {{ __('Tesla Model S') }}
                                 <i class="fa fa-circle text-danger"></i> {{ __('BMW 5 Series') }}
-                            </div>
+                            </div> --}}
                             <hr>
                             <div class="stats">
                                 <i class="fa fa-check"></i> {{ __('Data information certified') }}
@@ -272,13 +317,24 @@
                 <div class="col-md-6">
                     <div class="card  card-tasks">
                         <div class="card-header ">
-                            <h4 class="card-title">{{ __('Tasks') }}</h4>
-                            <p class="card-category">{{ __('Backend development') }}</p>
+                            <h4 class="card-title">{{ __('Recent Transactions Made') }}</h4>
+                            <p class="card-category">{{ __('') }}</p>
                         </div>
                         <div class="card-body ">
                             <div class="table-full-width">
                                 <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>{{ __('Receipt No') }}</th>
+                                            <th>{{ __('Amount') }}</th>
+                                            <th>{{ __('Date') }}</th>
+                                            <th>{{ __('Member ID') }}</th>
+                                            <th>{{ __('Status') }}</th>
+                                        </tr>
+                                    </thead>
                                     <tbody>
+                                        @foreach($recentDeposits as $deposit)
                                         <tr>
                                             <td>
                                                 <div class="form-check">
@@ -288,7 +344,29 @@
                                                     </label>
                                                 </div>
                                             </td>
-                                            <td>{{ __('Sign contract for "What are conference organizers afraid of?"') }}</td>
+                                            <td>{{ $deposit->receiptNo }}</td>
+                                            <td>{{ $deposit->amount }}</td>
+                                            <td>{{ $deposit->date }}</td>
+                                            <td>{{ $deposit->memberId }}</td>
+                                            <td>{{ $deposit->status }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                
+                                {{-- <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" value="">
+                                                        <span class="form-check-sign"></span>
+                                                    </label>
+                                                </div>
+
+                                            </td>
+                                           <td>{{receiptNo}} {{amount}} {{date}} {{memberId}} {{status}}</td>
                                             <td class="td-actions text-right">
                                                 <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
                                                     <i class="fa fa-edit"></i>
@@ -395,7 +473,7 @@
                                             </td>
                                         </tr>
                                     </tbody>
-                                </table>
+                                </table> --}}
                             </div>
                         </div>
                         <div class="card-footer ">
@@ -411,6 +489,35 @@
     </div>
 
     </div>
+    <script>
+    function sendMarkRequest(id = null) {
+        return $.ajax("#", {
+            method: 'POST',
+            data: {
+                _token,
+                id
+            }
+        });
+    }
+
+    $(function() {
+        $('.mark-as-read').click(function() {
+            let request = sendMarkRequest($(this).data('id'));
+
+            request.done(() => {
+                $(this).parents('div.alert').remove();
+            });
+        });
+
+        $('#mark-all').click(function() {
+            let request = sendMarkRequest();
+
+            request.done(() => {
+                $('div.alert').remove();
+            })
+        });
+    });
+    </script>
 
 
 @endsection
